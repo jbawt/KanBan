@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS projects CASCADE;
+
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  due_date DATE NOT NULL,
+  started BOOLEAN NOT NULL,
+  completed BOOLEAN NOT NULL,
+  archived BOOLEAN NOT NULL
+);

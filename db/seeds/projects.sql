@@ -1,0 +1,4 @@
+INSERT INTO projects (user_id, title, description, due_date, started, completed, archived) VALUES (1, 'project one', 'just a test project with some dumby data', '2021-12-10T04:24:15.607Z', false, false, false);
+INSERT INTO projects (user_id, title, description, due_date, started, completed, archived) VALUES (1, 'project two', 'just a test project with some dumby data', '2021-12-10T04:24:15.607Z', true, false, false);
+INSERT INTO projects (user_id, title, description, due_date, started, completed, archived) VALUES (2, 'project three', 'just a test project with some dumby data', '2021-12-10T04:24:15.607Z', false, false, false);
+INSERT INTO projects (user_id, title, description, due_date, started, completed, archived) VALUES (2, 'project four', 'just a test project with some dumby data', '2021-12-10T04:24:15.607Z', true, false, false);
