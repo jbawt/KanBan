@@ -10,13 +10,12 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db');
 const db = new Pool(dbParams);
 db.connect(() => {
-  console.log(`connected to ${dbParams.database} database`);
+  console.log(`connected to database`);
 });
 
 // EXPRESS CONFIG
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('public'));
 app.use(cors());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, 'client/build')));
