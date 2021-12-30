@@ -11,7 +11,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd client && npm run test",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "dbReset": "node db/resetdb.js",
