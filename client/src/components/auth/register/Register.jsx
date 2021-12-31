@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import Button from '../../uiComponents/Button';
 import register from '../../../helpers/register';
+import validateEmail from '../../../helpers/validateEmail';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
@@ -61,8 +62,10 @@ export default function Register({ setRegister }) {
   const classes = useStyles();
   const updateUser = useUpdateUserContext();
   const history = useHistory();
+  const [helperText, setHelperText] = useState("");
   const [matchingPass, setMatchingPass] = useState(true);
   const [emailExists, setEmailexists] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
   const [togglePass, setTogglePass] = useState(false);
   const [toggleConfirmPass, setToggleConfirmPass] = useState(false);
@@ -78,8 +81,10 @@ export default function Register({ setRegister }) {
   const handleRegisterInfo = (e) => {
 
     setEmailexists(false);
+    setInvalidEmail(false);
     setUsernameExists(false);
     setMatchingPass(true);
+    setHelperText("");
 
     if (e.target.id === 'email') {
       setRegisterInfo({
@@ -108,7 +113,12 @@ export default function Register({ setRegister }) {
   const handleRegister = () => {
     if (registerInfo.password === registerInfo.confirmPassword) {
       setMatchingPass(true);
-      register(registerInfo, updateUser, history, setEmailexists, setUsernameExists);
+      if (validateEmail(registerInfo.email)) {
+        register(registerInfo, updateUser, history, setEmailexists, setUsernameExists, setHelperText);
+      } else {
+        setInvalidEmail(true);
+        setHelperText("Invalid Email");
+      }
     } else {
       setMatchingPass(false);
     }
@@ -134,8 +144,8 @@ export default function Register({ setRegister }) {
           />
           <TextField
             onChange={(e) => handleRegisterInfo(e)}
-            error={emailExists}
-            helperText={emailExists ? "Email Already Exists" : ""}
+            error={emailExists || invalidEmail}
+            helperText={emailExists || invalidEmail ? helperText : ""}
             id="email"
             className={classes.input}
             variant="filled"

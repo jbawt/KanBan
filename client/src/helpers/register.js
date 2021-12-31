@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function register(registerInfo, updateUser, history, setEmailExists, setUsernameExists) {
+export default function register(registerInfo, updateUser, history, setEmailExists, setUsernameExists, setHelperText) {
 
   axios.post('/api/register', registerInfo)
     .then(res => {
@@ -21,6 +21,7 @@ export default function register(registerInfo, updateUser, history, setEmailExis
       if (error.response) {
         if (error.response.status === 400) {
           setEmailExists(true);
+          setHelperText("Email Already Exists");
         } else if (error.response.status === 403) {
           setUsernameExists(true);
         }
